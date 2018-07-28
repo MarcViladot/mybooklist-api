@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  plot: MyText
+  year: 2018-07-21
+  lang: MyString
+  pages: 1
+  type: 
+
+two:
+  name: MyString
+  plot: MyText
+  year: 2018-07-21
+  lang: MyString
+  pages: 1
+  type: 
