@@ -24,6 +24,9 @@ Rails.application.routes.draw do
       	#Reviews
       	get 'reviews/book/:book_id', to: 'reviews#show_by_book'
 
+        #User
+        get 'users/params', to: 'users#show_login_params'
+
   		end
 	end
 end

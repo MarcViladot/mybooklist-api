@@ -3,7 +3,10 @@ module Api
     class UsersController < ApplicationController
 
       def index
-        
+        if params[:me].present?
+          user = User.find(@current_user.id)
+        end
+          render json: user
       end
 
       api :POST, "/v1/users", "Sign up"
