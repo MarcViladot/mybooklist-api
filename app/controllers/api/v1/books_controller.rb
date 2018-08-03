@@ -4,8 +4,7 @@ module Api
 
       api :GET, '/v1/books', "Show all the books"
       def index
-        books = Book.all
-        render json: books
+        @books = Book.all
       end
 
       api :POST, "/v1/books", "Create a book"
@@ -34,11 +33,18 @@ module Api
         render json: book
       end
 
+      api :GET, "/v1/books/show/latest", "Show the last 20 books added"
+      def show_latest
+        books = Book.order("created_at DESC").limit(20)
+        render json: books
+      end
+
       api :GET, '/v1/books/:id', "Show a book"
       param :id, :number, :required => true
       def show
         book = Book.find(params[:id])
         render json: book
+
       end
 
       api :PUT, "/v1/books", "Update a book"

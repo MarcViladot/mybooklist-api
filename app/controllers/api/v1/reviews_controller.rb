@@ -44,6 +44,12 @@ module Api
         render json: reviews
       end
 
+      api :GET, "/v1/reviews/show/latest", "Show the last 5 reviews"
+      def show_latest
+        reviews = Review.order("created_at DESC").limit(5)
+        render json: reviews
+      end
+
       api :PUT, "/v1/reviews/:id", "Add a book to user list"
       param :id, :number, :required => true
       param :text, String

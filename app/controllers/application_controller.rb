@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  include ActionController::ImplicitRender
 
   before_action :set_current_user #, :authenticate_request
   #helper_method :authenticate_admin

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       	resources :favauthors
         resources :genrebooks
         resources :users
+        resources :authors
 
       	#Auth
       	post 'authenticate', to: 'authentication#authenticate'
@@ -23,9 +24,13 @@ Rails.application.routes.draw do
 
       	#Reviews
       	get 'reviews/book/:book_id', to: 'reviews#show_by_book'
+        get 'reviews/show/latest', to: 'reviews#show_latest'
 
         #User
         get 'users/params', to: 'users#show_login_params'
+
+        #User
+        get 'books/show/latest', to: 'books#show_latest'
 
   		end
 	end
