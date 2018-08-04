@@ -5,5 +5,4 @@ json.books @books do |book|
   json.serie book.serie
   json.authors book.authors
   json.genres book.genres
-
 end
