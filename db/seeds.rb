@@ -25,7 +25,7 @@ end
 end
 
 40.times do
-	Book.create({name:Faker::Book.unique.title, plot:lorem, year:rand(1990..2018), lang:'gb', pages:rand(200..1300), form:'novel', serie_id:rand(1..10), cover:'https://picsum.photos/405/600/?random'})
+	Book.create({name:Faker::Book.unique.title, plot:lorem, year:rand(1990..2018), lang:'gb', pages:rand(200..1300), form:'novel', serie_id:rand(1..10), cover:'https://picsum.photos/405/600/?image=' + (rand(200).to_s)})
 end
 
 1.upto(40) do |i|
@@ -33,7 +33,9 @@ end
 end
 
 1.upto(40) do |i|
-	Genrebook.create({genre_id:rand(1..15), book_id:i})
+	rand(1..5).times do
+		Genrebook.create({genre_id:rand(1..15), book_id:i})
+	end
 end
 
 5.times do

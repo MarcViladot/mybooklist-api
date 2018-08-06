@@ -39,12 +39,14 @@ module Api
         render json: books
       end
 
+      def show_search
+        @books = Book.where("name like ?", "%" + params[:search] + "%")
+      end
+
       api :GET, '/v1/books/:id', "Show a book"
       param :id, :number, :required => true
       def show
-        book = Book.find(params[:id])
-        render json: book
-
+        @book = Book.find(params[:id])
       end
 
       api :PUT, "/v1/books", "Update a book"

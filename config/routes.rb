@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         get 'score/:book_id', to: 'addeds#show_score'
         get 'scores/:book_id', to: 'addeds#show_scores'
         get 'list/:user_id', to: 'addeds#show_list'
+        get 'addeds-user-book/:user_id/:book_id', to: 'addeds#show_by_user_book'
 
         #Reviews
         get 'reviews/book/:book_id', to: 'reviews#show_by_book'
@@ -29,8 +30,9 @@ Rails.application.routes.draw do
         #User
         get 'users/params', to: 'users#show_login_params'
 
-        #User
+        #Book
         get 'books/show/latest', to: 'books#show_latest'
+        get 'books/show/search/:search', to: 'books#show_search'
 
       end
   end

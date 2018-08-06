@@ -38,6 +38,14 @@ module Api
         render json: added
       end
 
+      api :GET, "/v1/addeds-user-book/:user_id/:book_id", "Show a Added"
+      param :user_id, :number, :required => true
+      param :book_id, :number, :required => true
+      def show_by_user_book
+        added = Added.find_by(user_id: params[:user_id], book_id: params[:book_id])
+        render json: added
+      end
+
       api :GET, "/v1/score/:book_id", "Show score of the book"
       param :book_id, :number, :required => true
       def show_score
