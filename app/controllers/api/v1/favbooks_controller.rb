@@ -20,6 +20,14 @@ module Api
         end
       end
 
+      api :GET, "/v1/favourite-user-book/:user_id/:book_id", "Show a Favourite by user_id and book_id"
+      param :user_id, :number, :required => true
+      param :book_id, :number, :required => true
+      def show_by_user_book
+        fav = Favbook.find_by(user_id: params[:user_id], book_id: params[:book_id])
+        render json: fav
+      end
+
       api :DELETE, "/v1/favbooks/:id", "Remove book from user favourites"
       param :id, :number, :required => true
       def destroy

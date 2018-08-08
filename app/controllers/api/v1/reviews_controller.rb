@@ -40,8 +40,8 @@ module Api
       api :GET, "/v1/reviews/book/:book_id", "Show all the reviews of the book"
       param :book_id, :number, :required => true
       def show_by_book
-        reviews = Review.where("book_id = ?", params[:book_id])
-        render json: reviews
+        @reviews = Review.where("book_id = ?", params[:book_id])
+        # render json: reviews
       end
 
       api :GET, "/v1/reviews/show/latest", "Show the last 5 reviews"
