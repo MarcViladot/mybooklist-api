@@ -43,6 +43,12 @@ module Api
         @books = Book.where("name like ?", "%" + params[:search] + "%")
       end
 
+      api :GET, '/v1/books/:id', "Show books by genre"
+      param :genre_id, :number, :required => true
+      def show_genre
+        @books = Book.where("id IN (SELECT book_id FROM genrebooks WHERE genre_id = " + params[:genre_id] + ")")
+      end
+
       api :GET, '/v1/books/:id', "Show a book"
       param :id, :number, :required => true
       def show

@@ -60,14 +60,14 @@ module Api
       api :GET, "/v1/scores/:book_id", "Show percentages of book scores"
       param :book_id, :number, :required => true
       def show_scores
-      	scores = Hash.new
-      	addeds = Added.where("book_id = ? and score != 0", params[:book_id])
-      	1.upto(10) do |i|
-      		score_x = addeds.where("score = ?", i)
-      		scores[i] = 0
-      		scores[i] = score_x.count/addeds.count.to_f * 100 unless score_x.blank?
-      	end
-      	render json: scores
+      	# scores = Hash.new
+      	@addeds = Added.where("book_id = ? and score != 0", params[:book_id])
+      	# 1.upto(10) do |i|
+      	# 	score_x = addeds.where("score = ?", i)
+      	# 	scores[i] = 0
+      	# 	scores[i] = score_x.count/addeds.count.to_f * 100 unless score_x.blank?
+      	# end
+      	# render json: scores
       end
 
       api :GET, "/v1/list/:user_id", "Show user book list"

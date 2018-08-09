@@ -33,6 +33,8 @@ Rails.application.routes.draw do
         #Book
         get 'books/show/latest', to: 'books#show_latest'
         get 'books/show/search/:search', to: 'books#show_search'
+        get 'books/genre/:genre_id', to: 'books#show_genre'
+
 
         #Favbooks
         get 'favourite-user-book/:user_id/:book_id', to: 'favbooks#show_by_user_book'
