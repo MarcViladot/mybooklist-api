@@ -79,7 +79,7 @@ module Api
       	added_status.each do |x|
       		list[x] = addeds.where("status = ?", x)
       	end
-      	render json: list.to_json(:include => [:book => {:only => :name}])
+      	render json: list.to_json(:include => [:book => {:only => [:id, :name, :cover, :pages]}])
       end
 
       api :PUT, "/v1/addeds/:id", "Update Added"

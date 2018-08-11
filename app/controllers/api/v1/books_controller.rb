@@ -49,6 +49,12 @@ module Api
         @books = Book.where("id IN (SELECT book_id FROM genrebooks WHERE genre_id = " + params[:genre_id] + ")")
       end
 
+      api :GET, '/v1/books/author/:author_id', "Show books by author"
+      param :author_id, :number, :required => true
+      def show_author
+        @books = Book.where("id IN (SELECT book_id FROM authorbooks WHERE author_id = " + params[:author_id] + ")")
+      end
+
       api :GET, '/v1/books/:id', "Show a book"
       param :id, :number, :required => true
       def show

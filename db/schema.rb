@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180805191824) do
+ActiveRecord::Schema.define(version: 20180810115620) do
 
   create_table "addeds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "status"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20180805191824) do
     t.date "born"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "photo"
+    t.text "biography"
   end
 
   create_table "books", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -108,7 +110,7 @@ ActiveRecord::Schema.define(version: 20180805191824) do
     t.string "username"
     t.string "email"
     t.string "password_digest"
-    t.string "avatar"
+    t.string "avatar", default: "https://picsum.photos/200/200/?random"
     t.binary "role"
     t.binary "status"
     t.datetime "created_at", null: false
