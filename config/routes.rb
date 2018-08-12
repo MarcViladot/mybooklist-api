@@ -36,6 +36,8 @@ Rails.application.routes.draw do
         get 'books/genre/:genre_id', to: 'books#show_genre'
         get 'books/author/:author_id', to: 'books#show_author'
 
+        # Favauthors
+        get 'favourite-user-author/:user_id/:author_id', to: 'favauthors#show_by_user_author'
 
         #Favbooks
         get 'favourite-user-book/:user_id/:book_id', to: 'favbooks#show_by_user_book'
