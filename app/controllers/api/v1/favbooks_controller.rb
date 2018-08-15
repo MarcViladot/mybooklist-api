@@ -20,11 +20,11 @@ module Api
         end
       end
 
-      api :GET, "/v1/favourite-user-book/:user_id/:book_id", "Show a Favourite by user_id and book_id"
-      param :user_id, :number, :required => true
+      api :GET, "/v1/favourite-user-book/:book_id", "Show a Favourite by user_id and book_id"
       param :book_id, :number, :required => true
+      header 'Authorization', 'Auth header', :required => true
       def show_by_user_book
-        fav = Favbook.find_by(user_id: params[:user_id], book_id: params[:book_id])
+        fav = Favbook.find_by(user_id: @current_user.id, book_id: params[:book_id])
         render json: fav
       end
 

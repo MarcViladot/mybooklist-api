@@ -38,11 +38,19 @@ module Api
         render json: added
       end
 
-      api :GET, "/v1/addeds-user-book/:user_id/:book_id", "Show a Added"
-      param :user_id, :number, :required => true
+      # api :GET, "/v1/addeds-user-book/:user_id/:book_id", "Show a Added"
+      # param :user_id, :number, :required => true
+      # param :book_id, :number, :required => true
+      # def show_by_user_book
+      #   added = Added.find_by(user_id: params[:user_id], book_id: params[:book_id])
+      #   render json: added
+      # end
+
+      api :GET, "/v1/addeds-user-book/:book_id", "Show a Added"
       param :book_id, :number, :required => true
+      header 'Authorization', 'Auth header', :required => true
       def show_by_user_book
-        added = Added.find_by(user_id: params[:user_id], book_id: params[:book_id])
+        added = Added.find_by(user_id: @current_user.id, book_id: params[:book_id])
         render json: added
       end
 
@@ -70,12 +78,12 @@ module Api
       	# render json: scores
       end
 
-      api :GET, "/v1/list/:user_id", "Show user book list"
-      param :user_id, :number, :required => true
+      api :GET, "/v1/list/", "Show user book list"
+      header 'Authorization', 'Auth header', :required => true
       def show_list
       	added_status = ["Reading", "Completed", "On-hold", "Dropped", "Plan to Read"]
       	list = Hash.new
-      	addeds = Added.where("user_id = ?", params[:user_id])
+      	addeds = Added.where("user_id = ?", @current_user.id)
       	added_status.each do |x|
       		list[x] = addeds.where("status = ?", x)
       	end
