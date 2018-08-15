@@ -1,16 +1,23 @@
 class ApplicationController < ActionController::API
   include ActionController::ImplicitRender
+  include ActionController::Helpers
 
   before_action :set_current_user #, :authenticate_request
-  #helper_method :authenticate_admin
+  helper_method :authenticate_confirmed_user
 
-  private
-
-  def authenticate_admin
-    unless @current_user.role == '1'
+  def authenticate_confirmed_user
+    unless @current_user.email_confirmed == 1
       render json: {error: 'Not Authorized'}, status: :unauthorized
     end
   end
+
+  private
+
+  # def authenticate_admin
+  #   unless @current_user.role == 1
+  #     render json: {error: 'Not Authorized'}, status: :unauthorized
+  #   end
+  # end
 
   def set_current_user
     if decoded_auth_token

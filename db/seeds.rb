@@ -41,7 +41,7 @@ end
 end
 
 100.times do
-	User.create({username:Faker::OnePiece.unique.character, email:Faker::Internet.free_email, role:rand(1), status:1, password:'12345', password_confirmation:'12345'})
+	User.create({username:Faker::OnePiece.unique.character, email:Faker::Internet.free_email, password:'12345', password_confirmation:'12345'})
 end
 
 1000.times do

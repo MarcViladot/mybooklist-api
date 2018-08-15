@@ -2,6 +2,8 @@ module Api
   module V1
     class UsersController < ApplicationController
 
+      before_action :authenticate_confirmed_user, only: [:index]
+
       def index
         if params[:me].present?
           user = User.find(@current_user.id)
