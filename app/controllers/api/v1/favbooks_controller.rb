@@ -2,6 +2,8 @@ module Api
   module V1
     class FavbooksController < ApplicationController
 
+      before_action :authenticate_request, only: [:create, :show_by_user_book, :update]
+
       api :GET, "/v1/favbooks", "Show all the users-books relationships"
       def index
         fav = Favbook.all
@@ -9,8 +11,8 @@ module Api
       end
 
       api :POST, "/v1/favbooks", "Add favourite book to user"
-      param :user_id, :number, :required => true
       param :book_id, :number, :required => true
+      header 'Authorization', 'Auth header', :required => true
       def create
         fav = Favbook.new(favbook_params)
         if fav.save
@@ -55,7 +57,7 @@ module Api
       private
 
       def favbook_params
-        params.permit(:user_id, :book_id)
+        params.permit(:book_id).merge(user_id: @current_user.id)
       end
 
     end

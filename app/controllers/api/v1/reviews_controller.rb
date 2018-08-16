@@ -2,6 +2,8 @@ module Api
   module V1
     class ReviewsController < ApplicationController
 
+      before_action :authenticate_request, only: [:create, :update]
+
       api :GET, "/v1/reviews", "Show all the reviews"
       def index
         reviews = Review.all
@@ -11,8 +13,8 @@ module Api
       api :POST, "/v1/reviews", "Add a Review to book"
       param :text, String, :required => true
       param :score, :number, :required => true
-      param :user_id, :number, :required => true
       param :book_id, :number, :required => true
+      header 'Authorization', 'Auth header', :required => true
       def create
         review = Review.new(review_params)
         if review.save
@@ -56,6 +58,7 @@ module Api
       param :score, :number
       param :user_id, :number, :required => true
       param :book_id, :number, :required => true
+      header 'Authorization', 'Auth header', :required => true
       def update
         review = Review.find(params[:id])
         if review.update_attributes(review_params)
@@ -68,7 +71,7 @@ module Api
       private
 
       def review_params
-        params.permit(:text, :score, :user_id, :book_id)
+        params.permit(:text, :score, :book_id).merge(user_id: @current_user.id)
       end
 
     end

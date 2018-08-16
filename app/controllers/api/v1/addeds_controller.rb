@@ -2,6 +2,8 @@ module Api
   module V1
     class AddedsController < ApplicationController
 
+      before_action :authenticate_request, only: [:create, :update, :show_by_user_book, :show_list]
+
       api :GET, "/v1/addeds", "Show all the addeds"
       def index
         addeds = Added.all
@@ -12,8 +14,8 @@ module Api
       param :status, ["Reading", "Completed", "On-hold", "Dropped", "Plan to Read"], :required => true
       param :progress, :number, :required => true
       param :score, :number, :required => true
-      param :user_id, :number, :required => true
       param :book_id, :number, :required => true
+      header 'Authorization', 'Auth header', :required => true
       def create
         added = Added.new(added_params)
         if added.save
@@ -94,6 +96,7 @@ module Api
       param :status, ["Reading", "Completed", "On-hold", "Dropped", "Plan to Read"]
       param :progress, :number
       param :score, :number
+      header 'Authorization', 'Auth header', :required => true
       def update
         added = Added.find(params[:id])
         if added.update_attributes(added_params)
@@ -107,7 +110,7 @@ module Api
       private
 
       def added_params
-        params.permit(:status, :progress, :score, :user_id, :book_id)
+        params.permit(:status, :progress, :score, :book_id).merge(user_id: @current_user.id)
       end
 
     end

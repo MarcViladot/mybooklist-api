@@ -2,8 +2,8 @@ class ApplicationController < ActionController::API
   include ActionController::ImplicitRender
   include ActionController::Helpers
 
-  before_action :set_current_user #, :authenticate_request
-  helper_method :authenticate_confirmed_user
+  before_action :set_current_user
+  helper_method :authenticate_confirmed_user, :authenticate_request
 
   def authenticate_confirmed_user
     unless @current_user.email_confirmed == 1
