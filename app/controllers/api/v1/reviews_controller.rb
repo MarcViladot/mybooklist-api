@@ -2,7 +2,7 @@ module Api
   module V1
     class ReviewsController < ApplicationController
 
-      before_action :authenticate_request, only: [:create, :update]
+      before_action :authenticate_request, only: [:create, :update, :show_by_user_book]
 
       api :GET, "/v1/reviews", "Show all the reviews"
       def index
@@ -37,6 +37,14 @@ module Api
       def show
         review = Review.find(params[:id])
         render json: review
+      end
+
+      api :GET, "/v1/reviews/user-book/:book_id", "Show a Review by user_id and book_id"
+      param :book_id, :number, :required => true
+      header 'Authorization', 'Auth header', :required => true
+      def show_by_user_book
+        fav = Review.find_by(user_id: @current_user.id, book_id: params[:book_id])
+        render json: fav
       end
 
       api :GET, "/v1/reviews/book/:book_id", "Show all the reviews of the book"

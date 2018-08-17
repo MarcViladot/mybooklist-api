@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
   helper_method :authenticate_confirmed_user, :authenticate_request
 
   def authenticate_confirmed_user
-    unless @current_user.email_confirmed == 1
+    unless @current_user.email_confirmed == true
       render json: {error: 'Not Authorized'}, status: :unauthorized
     end
   end

@@ -20,9 +20,9 @@ module Api
         @user = User.new(user_params)    
         if @user.save
           UserMailer.registration_confirmation(@user).deliver
-          render json: "Please confirm your email address to continue"
+          render json: {status: 'SUCCESS', message:'User Created'},status: :ok
         else
-          render json: @user.errors
+          render json: {status: 'ERROR', message:@user.errors},status: :unprocessable_entity
         end
       end
 
