@@ -6,4 +6,11 @@ json.books @books do |book|
   json.serie book.serie
   json.authors book.authors
   json.genres book.genres
+
+  if @current_user != nil
+   	book.addeds.each do |added|
+  		json.added added if added.user.id == @current_user.id
+  	end
+  end
+
 end
