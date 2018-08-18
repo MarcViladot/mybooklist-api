@@ -43,14 +43,22 @@ module Api
       def destroy
       end
 
+      api :POST, "/v1/users/follow/:user_id", "Follow user"
+      param :user_id, :number, :required => true
+      header 'Authorization', 'Auth header', :required => true
       def follow
         @current_user.follow(params[:user_id])
       end
 
+      api :POST, "/v1/users/unfollow/:user_id", "Unfollow user"
+      param :user_id, :number, :required => true
+      header 'Authorization', 'Auth header', :required => true
       def unfollow
         @current_user.unfollow(params[:user_id])
       end
 
+      api :GET, "/v1/users/:id", "Show user"
+      param :id, :number, :required => true
       def show
         @user = User.find(params[:id])
       end
