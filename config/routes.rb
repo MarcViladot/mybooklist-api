@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         resources :favbooks
         resources :favauthors
         resources :genrebooks
+        resources :followings
         resources :users do
             member do
                 get :confirm_email
@@ -40,6 +41,10 @@ Rails.application.routes.draw do
         get 'books/show/search/:search', to: 'books#show_search'
         get 'books/genre/:genre_id', to: 'books#show_genre'
         get 'books/author/:author_id', to: 'books#show_author'
+
+        #Followings
+        post 'users/follow/:user_id', to: 'users#follow'
+        post 'users/unfollow/:user_id', to: 'users#unfollow'
 
         # Favauthors
         get 'favourite-user-author/:author_id', to: 'favauthors#show_by_user_author'

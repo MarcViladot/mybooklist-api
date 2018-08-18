@@ -63,3 +63,7 @@ end
 1000.times do
 	Review.create({text:loremHtml, score:rand(1..10), user_id:rand(1..100), book_id:rand(1..100)})
 end
+
+Follow.create({follower_id: 1, following_id: 2})
+Follow.create({follower_id: 3, following_id: 2})
+Follow.create({follower_id: 2, following_id: 4})

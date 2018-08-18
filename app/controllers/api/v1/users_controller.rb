@@ -3,6 +3,7 @@ module Api
     class UsersController < ApplicationController
 
       before_action :authenticate_confirmed_user, only: [:index]
+      before_action :authenticate_request, only: [:follow, :unfollow]
 
       def index
         if params[:me].present?
@@ -40,11 +41,18 @@ module Api
       end
 
       def destroy
-        
+      end
+
+      def follow
+        @current_user.follow(params[:user_id])
+      end
+
+      def unfollow
+        @current_user.unfollow(params[:user_id])
       end
 
       def show
-        
+        @user = User.find(params[:id])
       end
 
       def update

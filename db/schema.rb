@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180815202849) do
+ActiveRecord::Schema.define(version: 20180818150249) do
 
   create_table "addeds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "status"
@@ -74,6 +74,16 @@ ActiveRecord::Schema.define(version: 20180815202849) do
     t.index ["user_id"], name: "index_favbooks_on_user_id"
   end
 
+  create_table "follows", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "following_id", null: false
+    t.bigint "follower_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["follower_id"], name: "index_follows_on_follower_id"
+    t.index ["following_id", "follower_id"], name: "index_follows_on_following_id_and_follower_id", unique: true
+    t.index ["following_id"], name: "index_follows_on_following_id"
+  end
+
   create_table "genrebooks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -114,10 +124,14 @@ ActiveRecord::Schema.define(version: 20180815202849) do
     t.boolean "role", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "email_confirmed"
+    t.boolean "email_confirmed", default: false
     t.string "confirm_token"
   end
 
+  add_foreign_key "addeds", "books"
+  add_foreign_key "addeds", "users"
+  add_foreign_key "authorbooks", "authors"
+  add_foreign_key "authorbooks", "books"
   add_foreign_key "books", "series", column: "serie_id"
   add_foreign_key "favauthors", "authors"
   add_foreign_key "favauthors", "users"
