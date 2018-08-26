@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180818150249) do
+ActiveRecord::Schema.define(version: 20180825105215) do
 
   create_table "addeds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "status"
@@ -124,14 +124,12 @@ ActiveRecord::Schema.define(version: 20180818150249) do
     t.boolean "role", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "email_confirmed", default: false
+    t.boolean "email_confirmed"
     t.string "confirm_token"
+    t.string "gender"
+    t.date "born"
   end
 
-  add_foreign_key "addeds", "books"
-  add_foreign_key "addeds", "users"
-  add_foreign_key "authorbooks", "authors"
-  add_foreign_key "authorbooks", "books"
   add_foreign_key "books", "series", column: "serie_id"
   add_foreign_key "favauthors", "authors"
   add_foreign_key "favauthors", "users"

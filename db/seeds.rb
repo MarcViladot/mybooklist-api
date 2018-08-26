@@ -41,7 +41,7 @@ end
 end
 
 100.times do
-	User.create({username:Faker::OnePiece.unique.character, email:Faker::Internet.free_email, password:'12345', password_confirmation:'12345'})
+	User.create({username:Faker::OnePiece.unique.character, email:Faker::Internet.free_email, gender:Faker::Gender.binary_type, born:rand(1940..1990).to_s + '-01-01', password:'12345', password_confirmation:'12345', avatar:'https://picsum.photos/200/200/?image=' + (rand(201..400).to_s)})
 end
 
 1000.times do
@@ -64,6 +64,21 @@ end
 	Review.create({text:loremHtml, score:rand(1..10), user_id:rand(1..100), book_id:rand(1..100)})
 end
 
-Follow.create({follower_id: 1, following_id: 2})
-Follow.create({follower_id: 3, following_id: 2})
-Follow.create({follower_id: 2, following_id: 4})
+
+1.upto(100) do |i|
+	rand(1..10).times do
+	Follow.create({follower_id: i, following_id: rand(1..100)})
+	end
+end
+
+
+
+
+
+
+
+
+
+
+
+

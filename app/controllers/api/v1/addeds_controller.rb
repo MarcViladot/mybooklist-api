@@ -2,7 +2,7 @@ module Api
   module V1
     class AddedsController < ApplicationController
 
-      before_action :authenticate_request, only: [:create, :update, :show_by_user_book, :show_list]
+      before_action :authenticate_request, only: [:create, :update, :show_by_user_book]
 
       api :GET, "/v1/addeds", "Show all the addeds"
       def index
@@ -67,6 +67,10 @@ module Api
       	end
       end
 
+      def show_stats
+        @addeds = Added.where("user_id = ?", params[:user_id])
+      end
+
       api :GET, "/v1/scores/:book_id", "Show percentages of book scores"
       param :book_id, :number, :required => true
       def show_scores
@@ -81,11 +85,11 @@ module Api
       end
 
       api :GET, "/v1/list/", "Show user book list"
-      header 'Authorization', 'Auth header', :required => true
+      param :user_id, :number, :required => true
       def show_list
       	added_status = ["Reading", "Completed", "On-hold", "Dropped", "Plan to Read"]
       	list = Hash.new
-      	addeds = Added.where("user_id = ?", @current_user.id)
+      	addeds = Added.where("user_id = ?", params[:user_id])
       	added_status.each do |x|
       		list[x] = addeds.where("status = ?", x)
       	end
