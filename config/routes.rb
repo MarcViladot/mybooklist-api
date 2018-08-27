@@ -34,6 +34,8 @@ Rails.application.routes.draw do
         get 'reviews/book/:book_id', to: 'reviews#show_by_book'
         get 'reviews/show/latest', to: 'reviews#show_latest'
         get 'reviews/user-book/:book_id', to: 'reviews#show_by_user_book'
+        post 'reviews/upvote/:review_id', to: 'reviews#upvote'
+        delete 'reviews/downvote/:review_id', to: 'reviews#downvote'
 
         #User
         get 'users/params', to: 'users#show_login_params'
@@ -46,7 +48,7 @@ Rails.application.routes.draw do
 
         #Followings
         post 'users/follow/:user_id', to: 'users#follow'
-        post 'users/unfollow/:user_id', to: 'users#unfollow'
+        delete 'users/unfollow/:user_id', to: 'users#unfollow'
 
         # Favauthors
         get 'favourite-user-author/:author_id', to: 'favauthors#show_by_user_author'

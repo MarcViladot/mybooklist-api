@@ -50,7 +50,7 @@ module Api
         @current_user.follow(params[:user_id])
       end
 
-      api :POST, "/v1/users/unfollow/:user_id", "Unfollow user"
+      api :DELETE, "/v1/users/unfollow/:user_id", "Unfollow user"
       param :user_id, :number, :required => true
       header 'Authorization', 'Auth header', :required => true
       def unfollow

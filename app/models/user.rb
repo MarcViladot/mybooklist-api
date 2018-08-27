@@ -20,6 +20,11 @@ class User < ApplicationRecord
 	has_many :following_relationships, foreign_key: :follower_id, class_name: 'Follow'
 	has_many :following, through: :following_relationships, source: :following
 
+	has_many :recommendations
+
+	has_many :review_votes
+	has_many :reviews , through: :review_votes
+
 	has_secure_password
 
 	validates_presence_of :email

@@ -10,6 +10,16 @@ json.books @user.books do |book|
 	json.(book, :id, :name, :cover, :pages, :year)
 end
 
+json.recommendations @user.recommendations do |recommendation|
+	json.book_recommended do 
+		json.(recommendation.recommended, :name, :cover)
+	end
+	json.book_recommending do 
+		json.(recommendation.recommending, :name, :cover)
+	end
+	json.(recommendation, :reasons)
+end
+
 json.addeds do
 	json.array!(@user.addeds.sort_by{|o| o[:updated_at]}.reverse!) do |added|
 	  json.status added.status

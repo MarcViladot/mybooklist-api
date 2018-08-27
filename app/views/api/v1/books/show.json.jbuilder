@@ -14,11 +14,31 @@ if @book.serie != nil
 	end
 end
 
-json.reviews @book.reviews do |review|
-	json.(review, :id, :text, :score, :created_at)
-	json.user do 
-		json.(review.user, :id, :username, :avatar)
+
+json.reviews do 
+	json.array!(@book.reviews.sort_by{|o| o.review_votes.count.to_i}.reverse!) do |review|
+		json.(review, :id, :text, :score, :created_at)
+		json.upvotes review.review_votes.count.to_i
+		json.upvoted false
+		review.review_votes.each do |vote|
+			json.upvoted true if vote.user.id == @current_user.id
+		end
+		json.user do 
+			json.(review.user, :id, :username, :avatar)
+		end
 	end
 end
+
+# json.reviews @book.reviews do |review|
+# 	json.(review, :id, :text, :score, :created_at)
+# 	json.upvotes review.review_votes.count.to_i
+# 	json.upvoted false
+# 	review.review_votes.each do |vote|
+# 		json.upvoted true if vote.user.id == @current_user.id
+# 	end
+# 	json.user do 
+# 		json.(review.user, :id, :username, :avatar)
+# 	end
+# end
 
 

@@ -66,12 +66,20 @@ end
 	Review.create({text:loremHtml, score:rand(1..10), user_id:rand(1..100), book_id:rand(1..100)})
 end
 
-
-1.upto(100) do |i|
-	rand(1..10).times do
-	Follow.create({follower_id: i, following_id: rand(1..100)})
-	end
+5.times do 
+	Recommendation.create({reasons:lorem, recommended_id:rand(1..50), recommending_id:rand(51..100), user_id:1})
 end
+
+10000.times do 
+	ReviewVote.create({user_id:rand(1..100), review_id:rand(1..1000)})
+end
+
+
+# 1.upto(100) do |i|
+# 	rand(1..10).times do
+# 	Follow.create({follower_id: i, following_id: rand(1..100)})
+# 	end
+# end
 
 
 

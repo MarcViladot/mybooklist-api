@@ -24,6 +24,27 @@ module Api
         end
       end
 
+      api :POST, "/v1/reviews/upvote/:review_id", "Upvote Review"
+      param :review_id, :number, :required => true
+      header 'Authorization', 'Auth header', :required => true
+      def upvote
+        voted = ReviewVote.create(params.permit(:review_id).merge(user_id: @current_user.id))
+        if voted.save
+          render json: voted
+        else
+          render json: voted.errors
+        end
+      end
+      
+      api :DELETE, "/v1/reviews/downvote/:review_id", "Downvote Review"
+      param :review_id, :number, :required => true
+      header 'Authorization', 'Auth header', :required => true
+      def downvote
+        voted = ReviewVote.find_by(user_id: @current_user.id, review_id: params[:review_id])
+        voted.destroy
+        render json: voted
+      end
+
       api :DELETE, "/v1/reviews/:id", "Delete a review"
       param :id, :number, :required => true
       def destroy

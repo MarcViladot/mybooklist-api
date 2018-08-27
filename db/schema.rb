@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180825105215) do
+ActiveRecord::Schema.define(version: 20180827102957) do
 
   create_table "addeds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "status"
@@ -99,6 +99,27 @@ ActiveRecord::Schema.define(version: 20180825105215) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "recommendations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text "reasons"
+    t.integer "recommended_id", null: false
+    t.integer "recommending_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["recommended_id"], name: "index_recommendations_on_recommended_id"
+    t.index ["recommending_id"], name: "index_recommendations_on_recommending_id"
+    t.index ["user_id"], name: "index_recommendations_on_user_id"
+  end
+
+  create_table "review_votes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "review_id"
+    t.index ["review_id"], name: "index_review_votes_on_review_id"
+    t.index ["user_id"], name: "index_review_votes_on_user_id"
+  end
+
   create_table "reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text "text"
     t.integer "score"
@@ -137,6 +158,9 @@ ActiveRecord::Schema.define(version: 20180825105215) do
   add_foreign_key "favbooks", "users"
   add_foreign_key "genrebooks", "books"
   add_foreign_key "genrebooks", "genres"
+  add_foreign_key "recommendations", "users"
+  add_foreign_key "review_votes", "reviews"
+  add_foreign_key "review_votes", "users"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
 end
