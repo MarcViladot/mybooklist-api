@@ -67,8 +67,20 @@ module Api
       	end
       end
 
+      api :GET, "/v1/users/stat/:user_id", "Show stats of user"
+      param :user_id, :number, :required => true
       def show_stats
         @addeds = Added.where("user_id = ?", params[:user_id])
+      end
+
+      api :GET, "/v1/users/stat/:user_id", "Show stats of user"
+      header 'Authorization', 'Auth header', :required => true
+      def show_latest
+        array = []
+        @current_user.following.each do |user|
+          array += user.addeds
+        end
+        render json: array.sort_by{|o| o[:updated_at]}.reverse!.values_at(0..4)
       end
 
       api :GET, "/v1/scores/:book_id", "Show percentages of book scores"

@@ -28,6 +28,7 @@ Rails.application.routes.draw do
         get 'list/:user_id', to: 'addeds#show_list'
         get 'addeds-user-book/:book_id', to: 'addeds#show_by_user_book'
         get 'users/stats/:user_id', to: 'addeds#show_stats'
+        get 'addeds/show/latest', to: 'addeds#show_latest'
 
         #Reviews
         get 'reviews/book/:book_id', to: 'reviews#show_by_book'

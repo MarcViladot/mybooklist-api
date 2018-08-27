@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-require 'faker'
+# require 'faker'
 
 lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam accumsan posuere justo quis sagittis. Quisque tempus tellus dui, finibus porta nisl placerat sed. Etiam sed tincidunt mi. Suspendisse aliquam nisi eget velit gravida, eu laoreet quam mattis. Proin vitae volutpat magna. Fusce porta vel lectus quis aliquet. Integer nunc lorem, elementum quis tellus ut, rhoncus fringilla purus. Mauris lacinia urna lacinia dolor sollicitudin, quis egestas nunc venenatis. Aliquam quis nunc sollicitudin purus aliquam molestie quis non tortor. Aenean auctor elit ut interdum pretium. Sed condimentum lacus nec lectus ultrices, sit amet iaculis ligula ultrices. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque vehicula volutpat nulla, et commodo justo vestibulum sed. Vestibulum vitae convallis sapien."
 loremHtml = "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sit amet mi id mauris ornare fermentum. Nam elit leo, pretium in sem eget, maximus venenatis lectus. Maecenas sagittis et purus vel pretium. Mauris id nisi condimentum, volutpat eros eu, fringilla justo. Phasellus tincidunt lacinia odio, quis rutrum nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec pharetra ultrices fermentum. Cras arcu felis, ullamcorper non eros et, auctor ultricies mi.</p>
@@ -40,12 +40,14 @@ end
 	end
 end
 
+
+User.create({username:Faker::OnePiece.unique.character, email:'tanja@hotmail.com', gender:Faker::Gender.binary_type, born:rand(1940..1990).to_s + '-01-01', password:'12345', password_confirmation:'12345', avatar:'https://picsum.photos/200/200/?image=' + (rand(201..400).to_s)})
 100.times do
 	User.create({username:Faker::OnePiece.unique.character, email:Faker::Internet.free_email, gender:Faker::Gender.binary_type, born:rand(1940..1990).to_s + '-01-01', password:'12345', password_confirmation:'12345', avatar:'https://picsum.photos/200/200/?image=' + (rand(201..400).to_s)})
 end
 
 1000.times do
-	Added.create({status:added_status.sample, progress:rand(200), score:rand(1..10), user_id:rand(1..100), book_id:rand(rand(1..100))})
+	Added.create({status:added_status.sample, progress:rand(0..200), score:rand(1..10), user_id:rand(1..100), book_id:rand(rand(1..100))})
 end
 
 1.upto(5) do |i|

@@ -16,6 +16,7 @@ json.addeds do
 	  json.progress added.progress
 	  json.score added.score
 	  json.update added.updated_at
+	  json.percentage added.progress/added.book.pages.to_f*100
 	  json.book do
 	  	json.(added.book, :id, :name, :cover, :pages)
 	  end
