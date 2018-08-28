@@ -17,10 +17,12 @@ class Book < ApplicationRecord
 
 	belongs_to :serie
 
-	has_many :recommended_relationships, foreign_key: :recommended_id, class_name: 'Recommendations'
-	has_many :recommendeds, through: :recommended_relationships, source: :recommended
+	# has_many :recommended_relationships, foreign_key: :recommended_id, class_name: 'Recommendation'
+	# has_many :recommendeds, through: :recommended_relationships, source: :recommended
 
-	has_many :recommending_relationships, foreign_key: :recommending_id, class_name: 'Recommendations'
-	has_many :recommendings, through: :recommending_relationships, source: :recommending
+	# has_many :recommending_relationships, foreign_key: :recommending_id, class_name: 'Recommendation'
+	# has_many :recommendings, through: :recommending_relationships, source: :recommending
+
+	has_many :recommendations, foreign_key: :recommended_id
 
 end

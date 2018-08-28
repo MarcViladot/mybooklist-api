@@ -10,14 +10,28 @@ json.books @user.books do |book|
 	json.(book, :id, :name, :cover, :pages, :year)
 end
 
+json.reviews do 
+	json.array!(@user.reviews.sort_by{|o| o.review_votes.count.to_i}.reverse!) do |review|
+		json.(review, :id, :text, :score, :created_at)
+		json.upvotes review.review_votes.count.to_i
+		json.upvoted false
+		review.review_votes.each do |vote|
+			json.upvoted true if vote.user.id == @current_user.id
+		end
+		json.book do 
+			json.(review.book, :id, :name, :cover)
+		end
+	end
+end
+
 json.recommendations @user.recommendations do |recommendation|
 	json.book_recommended do 
-		json.(recommendation.recommended, :name, :cover)
+		json.(recommendation.recommended, :id, :name, :cover)
 	end
 	json.book_recommending do 
-		json.(recommendation.recommending, :name, :cover)
+		json.(recommendation.recommending, :id, :name, :cover)
 	end
-	json.(recommendation, :reasons)
+	json.(recommendation, :reasons, :created_at)
 end
 
 json.addeds do

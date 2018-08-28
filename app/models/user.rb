@@ -23,7 +23,7 @@ class User < ApplicationRecord
 	has_many :recommendations
 
 	has_many :review_votes
-	has_many :reviews , through: :review_votes
+	#has_many :reviews , through: :review_votes
 
 	has_secure_password
 

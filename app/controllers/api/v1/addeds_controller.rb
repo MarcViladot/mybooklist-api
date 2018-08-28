@@ -73,7 +73,7 @@ module Api
         @addeds = Added.where("user_id = ?", params[:user_id])
       end
 
-      api :GET, "/v1/users/stat/:user_id", "Show stats of user"
+      api :GET, "/v1/addeds/show/latest", "Show last addeds"
       header 'Authorization', 'Auth header', :required => true
       def show_latest
         array = []

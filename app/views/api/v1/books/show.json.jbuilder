@@ -29,15 +29,16 @@ json.reviews do
 	end
 end
 
-# json.reviews @book.reviews do |review|
-# 	json.(review, :id, :text, :score, :created_at)
-# 	json.upvotes review.review_votes.count.to_i
-# 	json.upvoted false
-# 	review.review_votes.each do |vote|
-# 		json.upvoted true if vote.user.id == @current_user.id
-# 	end
-# 	json.user do 
-# 		json.(review.user, :id, :username, :avatar)
+json.recommendations @book.recommendations do |recommendation|
+	json.book_recommending do 
+		json.(recommendation.recommending, :id, :name, :cover)
+	end
+	json.(recommendation, :reasons, :created_at)
+end
+
+# json.recommendations do
+# 	json.array!(@book.recommendings.sort_by{|o| o.addeds.average(:score).to_f}.reverse!) do |b|
+# 		json.(b, :id, :cover, :name)
 # 	end
 # end
 

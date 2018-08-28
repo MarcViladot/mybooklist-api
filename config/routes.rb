@@ -12,6 +12,7 @@ Rails.application.routes.draw do
         resources :favauthors
         resources :genrebooks
         resources :followings
+        resources :recommendations
         resources :users do
             member do
                 get :confirm_email
@@ -36,6 +37,9 @@ Rails.application.routes.draw do
         get 'reviews/user-book/:book_id', to: 'reviews#show_by_user_book'
         post 'reviews/upvote/:review_id', to: 'reviews#upvote'
         delete 'reviews/downvote/:review_id', to: 'reviews#downvote'
+
+        # Recommendations
+        get 'recommendations/show/latest', to: 'recommendations#show_latest'
 
         #User
         get 'users/params', to: 'users#show_login_params'
