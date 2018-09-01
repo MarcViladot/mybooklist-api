@@ -2,7 +2,7 @@ module Api
   module V1
     class ReviewsController < ApplicationController
 
-      before_action :authenticate_request, only: [:create, :update, :show_by_user_book]
+      before_action :authenticate_request, only: [:create, :update, :show_by_user_book, :upvote, :downvote]
 
       api :GET, "/v1/reviews", "Show all the reviews"
       def index

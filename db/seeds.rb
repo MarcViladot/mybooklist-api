@@ -66,8 +66,12 @@ end
 	Review.create({text:loremHtml, score:rand(1..10), user_id:rand(1..100), book_id:rand(1..100)})
 end
 
-5.times do 
-	Recommendation.create({reasons:lorem, recommended_id:rand(1..50), recommending_id:rand(51..100), user_id:1})
+150.times do 
+	Recommendation.create({reasons:loremHtml, recommended_id:rand(1..50), recommending_id:rand(51..100), user_id:rand(1..100)})
+end
+
+150.times do 
+	Recommendation.create({reasons:loremHtml, recommended_id:rand(51..100), recommending_id:rand(1..50), user_id:rand(1..100)})
 end
 
 10000.times do 

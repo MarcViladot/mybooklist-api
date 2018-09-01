@@ -25,11 +25,14 @@ json.reviews do
 end
 
 json.recommendations @user.recommendations do |recommendation|
-	json.book_recommended do 
+	json.recommended do 
 		json.(recommendation.recommended, :id, :name, :cover)
 	end
-	json.book_recommending do 
+	json.recommending do 
 		json.(recommendation.recommending, :id, :name, :cover)
+	end
+	json.user do 
+		json.(recommendation.user, :id, :username)
 	end
 	json.(recommendation, :reasons, :created_at)
 end

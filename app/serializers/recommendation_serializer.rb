@@ -3,4 +3,5 @@ class RecommendationSerializer < ActiveModel::Serializer
 
   has_one :recommended
   has_one :recommending
+  has_one :user
 end

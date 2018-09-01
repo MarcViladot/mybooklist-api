@@ -46,7 +46,7 @@ module Api
       end
       
       api :PUT, "/v1/addeds/:id", "Update Favourite"
-      # TODO
+      param :author_id, :number, :required => true
       header 'Authorization', 'Auth header', :required => true
       def update
         fav = Favauthor.find(params[:id])
