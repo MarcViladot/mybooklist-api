@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 
         # Recommendations
         get 'recommendations/show/latest', to: 'recommendations#show_latest'
+        get 'recommendations/user-book/:book_id', to: 'recommendations#show_by_user_book'
 
         #User
         get 'users/params', to: 'users#show_login_params'
@@ -49,6 +50,7 @@ Rails.application.routes.draw do
         get 'books/show/search/:search', to: 'books#show_search'
         get 'books/genre/:genre_id', to: 'books#show_genre'
         get 'books/author/:author_id', to: 'books#show_author'
+        get 'books/list/user', to: 'books#show_user'
 
         #Followings
         post 'users/follow/:user_id', to: 'users#follow'

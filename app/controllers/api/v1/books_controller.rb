@@ -2,6 +2,8 @@ module Api
   module V1
     class BooksController < ApplicationController
 
+      before_action :authenticate_request, only: [:show_user]
+
       api :GET, '/v1/books', "Show all the books"
       def index
         @books = Book.all
@@ -53,6 +55,13 @@ module Api
       param :author_id, :number, :required => true
       def show_author
         @books = Book.where("id IN (SELECT book_id FROM authorbooks WHERE author_id = " + params[:author_id] + ")")
+      end
+
+      api :GET, '/v1/books/list/user', "Show books in user list"
+      header 'Authorization', 'Auth header', :required => true
+      def show_user
+        books = Book.where("id IN (SELECT book_id FROM addeds WHERE user_id = " + @current_user.id.to_s + ")").order("name ASC")
+        render json: books
       end
 
       api :GET, '/v1/books/:id', "Show a book"

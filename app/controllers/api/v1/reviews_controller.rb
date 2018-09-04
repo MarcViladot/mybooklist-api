@@ -64,8 +64,8 @@ module Api
       param :book_id, :number, :required => true
       header 'Authorization', 'Auth header', :required => true
       def show_by_user_book
-        fav = Review.find_by(user_id: @current_user.id, book_id: params[:book_id])
-        render json: fav
+        review = Review.find_by(user_id: @current_user.id, book_id: params[:book_id])
+        render json: review
       end
 
       api :GET, "/v1/reviews/book/:book_id", "Show all the reviews of the book"

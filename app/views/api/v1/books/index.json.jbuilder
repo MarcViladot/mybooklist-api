@@ -1,4 +1,4 @@
-json.books @books do |book|
+json.array!(@books.sort_by{|o| o.addeds.average(:score).to_f}.reverse!) do |book|
   json.extract! book, :id, :name, :plot, :year, :lang, :form, :cover, :pages
   json.score book.addeds.average(:score).to_f
   json.popularity book.favbooks.count.to_i

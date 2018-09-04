@@ -22,6 +22,11 @@ module Api
         render json: rec
       end
 
+      def show_by_user_book
+        rec = Recommendation.find_by(user_id: @current_user.id, recommended_id: params[:book_id])
+        render json: rec
+      end
+
       def show
         rec = Recommendation.find(params[:id])
         render json: rec
